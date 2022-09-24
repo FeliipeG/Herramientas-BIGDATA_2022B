@@ -3,6 +3,7 @@ from ast import parse
 from operator import truediv
 import numpy as np
 import argparse
+import pandas as pd
 
 def calcular_min_max(lista_numeros, verbose=1):
     #Retorna los valores minimo y maximo de una lista de numeros
