@@ -21,8 +21,8 @@ def list_file():
     Returns:
         listFiles: retorna lista con los nombres de archivos
     """
-  
-    bucket_name="romariosilva_bucket_llamadas123"
+
+    bucket_name="fgutierrez_bucket_llamadas123"
     storage_client = storage.Client()
     blobs = storage_client.list_blobs(bucket_name)
 
@@ -74,7 +74,7 @@ def load_file(file):
     Returns:
         new_data: retorna dataframe valido para continuar con limpieza de datos
     """
-    bucket = "gs://romariosilva_bucket_llamadas123"
+    bucket = "gs://fgutierrez_bucket_llamadas123"
     root_dir = Path(".").resolve().parent 
     folder1 = "data"
     folder2 = "raw"
@@ -104,7 +104,7 @@ def move_files(file):
     Returns:
         No retorna datos
     """
-    bucket_name = "romariosilva_bucket_llamadas123"
+    bucket_name = "fgutierrez_bucket_llamadas123"
     blob_name="data/raw/"+file
     destination_blob_name = "data/processed/"+file
 
@@ -269,9 +269,10 @@ def save_bq(new_data):
 
         client = bigquery.Client()
         job = client.load_table_from_dataframe(
-            new_data, "espbigdatarsg.espbigdatarsg.llamadas_123_new"
+            new_data, "especializacionbigdata2022.esp_big_data_felipeg.llamadas_123"
         )  # Make an API request.
         job.result()  # Wait for the job to complete.
+        #new_data.to_gbq(destination_table="esp_big_data_felipeg.llamadas_123")
         logging.info(f'insertando datos en bigquery : {job.result()}')
     except Exception as Argument:
         logging.error(f'error insertando datos en bigquery : {job.result()}')
